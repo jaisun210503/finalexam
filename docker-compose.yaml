@@ -1,0 +1,22 @@
+version: '3.7'
+
+services:
+  microservice1:
+    build:
+      context: ./microservice1
+    ports:
+      - "8081:80"  # Expose port 80 of the container to port 8081 on the host
+    networks:
+      - microservices-network
+
+  microservice2:
+    build:
+      context: ./microservice2
+    ports:
+      - "8082:80"  # Expose port 80 of the container to port 8082 on the host
+    networks:
+      - microservices-network
+
+networks:
+  microservices-network:
+    driver: bridge
