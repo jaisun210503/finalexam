@@ -1,22 +1,24 @@
-version: '3.7'
+version: '3.8'
 
 services:
   microservice1:
     build:
-      context: ./microservice1
+      context: ./microservice1  # Path to the Dockerfile for microservice1
+      dockerfile: Dockerfile     # You can specify the exact Dockerfile name if it's not default
     ports:
-      - "8085:80"  # Expose port 80 of the container to port 8081 on the host
+      - "8081:80"  # Mapping container port 80 to host port 8081
     networks:
-      - microservices-network
+      - app-network
 
   microservice2:
     build:
-      context: ./microservice2
+      context: ./microservice2  # Path to the Dockerfile for microservice2
+      dockerfile: Dockerfile     # You can specify the exact Dockerfile name if it's not default
     ports:
-      - "8084:80"  # Expose port 80 of the container to port 8082 on the host
+      - "8082:80"  # Mapping container port 80 to host port 8082
     networks:
-      - microservices-network
+      - app-network
 
 networks:
-  microservices-network:
-    driver: bridge
+  app-network:
+    driver: bridge  # Default network for communication between microservices
